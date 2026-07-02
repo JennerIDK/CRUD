@@ -20,6 +20,13 @@ public class ProductoService {
         return repository.findAll();
     }
 
+    public List<Producto> listarPorNombre(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            return listar();
+        }
+        return repository.findByNombreIgnoreCase(nombre);
+    }
+
     public void guardar(Producto producto) {
         repository.save(producto);
     }

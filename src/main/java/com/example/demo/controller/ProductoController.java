@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Producto;
 import com.example.demo.service.ProductoService;
@@ -20,9 +21,10 @@ public class ProductoController {
     }
 
     @GetMapping("/")
-    public String listar(Model model) {
+    public String listar(@RequestParam(required = false) String nombre, Model model) {
 
-        model.addAttribute("productos", service.listar());
+        model.addAttribute("productos", service.listarPorNombre(nombre));
+        model.addAttribute("nombre", nombre);
 
         return "index";
     }
